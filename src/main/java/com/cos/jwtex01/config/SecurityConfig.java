@@ -32,7 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and()	
+				http
+				.cors().and()
+				.addFilter(corsFilter)
 				.csrf().disable()  
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
@@ -42,12 +44,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.addFilter(new JwtAuthenticationFilter(authenticationManager()))
 				.addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository, session))
 				.authorizeRequests()
-				.antMatchers(HttpMethod.POST).permitAll()
-				.antMatchers("/user/**", "/post/**","/login/**")
+				.antMatchers("/user/**", "/post/**")
 				.access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 				.antMatchers("/admin/**")
 					.access("hasRole('ROLE_ADMIN')")
-				.anyRequest().permitAll();
+		.anyRequest().permitAll();
 	}
 	
     public CorsConfigurationSource corsConfigurationSource() {

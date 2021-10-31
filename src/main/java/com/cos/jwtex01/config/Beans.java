@@ -18,7 +18,7 @@ public class Beans {
 	      config.addAllowedHeader("*");
 	      config.addAllowedMethod("*");
 
-	      source.registerCorsConfiguration("/api/**", config);
+	      source.registerCorsConfiguration("/**", config);//cors....
 	      return new CorsFilter(source);
 	   }
 	   
