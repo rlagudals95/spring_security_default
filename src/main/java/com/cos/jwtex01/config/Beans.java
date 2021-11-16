@@ -17,7 +17,8 @@ public class Beans {
 	      config.addAllowedOrigin("*"); // e.g. http://domain1.com
 	      config.addAllowedHeader("*");
 	      config.addAllowedMethod("*");
-
+	      config.addExposedHeader("Authorization"); // response 값에 token실어 보내기
+	      
 	      source.registerCorsConfiguration("/**", config);//cors....
 	      return new CorsFilter(source);
 	   }
