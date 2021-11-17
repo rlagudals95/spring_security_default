@@ -1,8 +1,12 @@
 package com.cos.jwtex01.web;
 
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.cos.jwtex01.naver.NaverCrawler;
@@ -17,18 +21,21 @@ import com.cos.jwtex01.naver.NaverCrawler;
 
 @Service("naverService")
 public class NaverService {
-
-	public static void main(String[] args) {
-		String id = "${property.naver.ClientID}";
-        String secret ="${property.naver.ClientSecret}";
-        
+	
+	public static String main(String url) {
+              
+	    String result = "";
         try {
 	        NaverCrawler crawler = new NaverCrawler();
-	        String url = URLEncoder.encode("needjarvis", "UTF-8");
-	        String response = crawler.search(id, secret, url);
-	        System.out.println(response);	        
+	        String _url = URLEncoder.encode(url, "UTF-8");
+	        String response = crawler.search("Qjcu2eErcOe9ypZkNwbQ", "2S8N_LMwCP", _url);
+	        
+	        result = response;
+	       
         } catch (Exception e) {
         	e.printStackTrace();
         }
+        System.out.println(result);
+        return result;
 	}
 }

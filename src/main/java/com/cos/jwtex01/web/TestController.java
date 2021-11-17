@@ -1,6 +1,7 @@
 package com.cos.jwtex01.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.jwtex01.config.auth.LoginUser;
@@ -13,12 +14,10 @@ public class TestController {
 	private NaverService naverService;
 	
 	// 유저 혹은 어드민이 접근 가능
-	@GetMapping("/search")
-	public String user() {
+	@GetMapping("/search/{url}")
+	public String user(@PathVariable("url") String url) {
 		//System.out.println("principal : "+principal.getUsername());
-		
-		NaverService.main(null);
-		
+		NaverService.main(url);	
 		return "연결완료";
 	}	
 }
